@@ -1,6 +1,21 @@
 import React from "react";
-import logo from "./logo.svg";
+import uuid from "uuid-random";
 import "./App.css";
+
+function RenderList({ lists }) {
+	return lists.map((el) => {
+		return (
+			<div className="list" key={el.id}>
+				<h2>
+					{el.task} {el.description}
+				</h2>
+				<p>
+					{el.complete} === true ? "Tarea Completada" : "Tarea por Completar"
+				</p>
+			</div>
+		);
+	});
+}
 
 class App extends React.Component {
 	state = {
@@ -20,11 +35,8 @@ class App extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		const list = {
-			task: this.state.task,
-			description: this.state.description,
-			complete: this.state.complete,
-		};
+		const { task, description, complete } = this.state;
+		const list = { id: uuid, task, description, complete };
 		const lists = this.state.lists.concat(list);
 
 		this.setState({
@@ -71,6 +83,7 @@ class App extends React.Component {
 					/>
 					<button type="submit">Enviar</button>
 				</form>
+				<RenderList users={this.state.lists} />
 			</div>
 		);
 	}
