@@ -10,7 +10,7 @@ function RenderList({ lists }) {
 					{el.task} {el.description}
 				</h2>
 				<p>
-					{el.complete} === true ? "Tarea Completada" : "Tarea por Completar"
+					{el.complete === true ? "Tarea Completada" : "Tarea por Completar"}
 				</p>
 			</div>
 		);
@@ -48,7 +48,6 @@ class App extends React.Component {
 	};
 
 	render() {
-		console.log(this.state.lists);
 		return (
 			<div className="App">
 				<form onSubmit={this.handleSubmit}>
@@ -83,7 +82,7 @@ class App extends React.Component {
 					/>
 					<button type="submit">Enviar</button>
 				</form>
-				<RenderList users={this.state.lists} />
+				<RenderList lists={this.state.lists} />
 			</div>
 		);
 	}
